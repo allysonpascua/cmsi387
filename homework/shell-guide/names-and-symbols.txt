@@ -1,0 +1,45 @@
+Name and Symbol Guide
+
+~   home directory
+
+
+#   comment
+    - lines beginning with it will NOT be executed
+
+
+\   escape
+    - express single characters literally
+
+
+/   path separator
+    - separate paths within a directory
+
+
+$   1. variable substitution
+       - contents of a variable
+       - ex. variable1 = 23
+             echo variable1 ---> yields variable1
+             echo $variable1 --> yields 23
+
+    2. end-of-line
+       - end of a line of text when used in a regular expression
+
+
+^   beginning-of-line
+    - beginning of a line of text when used in a regular expression
+
+
+*   repetition matcher
+    - match repetition of a string or regular expression with at least zero instances
+
+
+|   pipe
+    - make the output of previous command the input of the next command
+
+
+;   command separator
+    - execute multiple commands on the same line separated by a semicolon 
+
+
+,   operation linker
+    - chain multiple arithmetic operations on the same line separated by a comma
