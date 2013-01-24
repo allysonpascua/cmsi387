@@ -1,0 +1,144 @@
+Command Crib Sheet
+
+cd      - function:     change directory
+
+        - sample:       apascua@sample:~/this$ cd that
+                        apascua@sample:~/this/that$
+
+        - sample desc:  changes the current working directory 
+                        to 'that' directory
+                        now you are in ~/this/that
+
+
+
+cp      - function:     copy file or directory 
+
+        - sample:       apascua@sample:~/this$ cp file1.txt that
+                        apascua@sample:~/this$ cd that
+                        apascua@sample:~/this/that$ ls
+                        file1.txt
+
+        - sample desc:  copies the file file1.txt to the directory ~/this/that
+
+
+
+ls      - function:     list files and directories
+
+        - sample:       apascua@sample:~/this$ ls
+                        folder1   folder2   file1.txt
+
+        - sample desc:  lists the contents of this
+                        this contains:
+                        - 2 folders: folder1 and folder2
+                        - 1 text file: file1.txt
+
+
+
+pwd     - function:     print working directory
+
+        - sample:       apascua@sample:~/this$ pwd
+                        /c/Users/apascua/this
+
+        - sample desc:  prints the full pathname 
+                        of the current working directory
+                        in this sample, 
+                        the home directory is /c/Users/apascua
+
+
+
+mv      - function:     move or rename a file or directory
+
+        - sample1:      apascua@sample:~/this$ mv example.txt that-directory
+                        apascua@sample:~/this$ cd that-directory
+                        apascua@sample:~/this$ ls
+                        example.txt
+
+        - sample1 desc: moves the file example.txt from ~/this 
+                        to ~/this/that
+
+        - sample2:      apascua@sample:~/this/that$ mv example.txt test.txt
+                        apascua@sample:~/this/that$ ls
+                        test.txt
+
+        - sample2 desc: renames the file example.txt to test.txt
+
+
+
+
+rm      - function:     remove a file
+
+        - sample:       apascua@sample:~/this$ ls
+                        folder1   folder2   file1.txt
+
+                        apascua@sample:~/this$ rm file1.txt
+                        apascua@sample:~/this$ ls
+                        folder1   folder2
+
+        - sample desc:  removes the file file1.txt from ~/this 
+
+
+
+mkdir   - function:     create a new directory
+
+        - sample:       apascua@sample:~/this$ ls
+                        folder1 folder2 file1.txt
+
+                        apascua@sample:~/this$ mkdir folder3
+                        apascua@sample:~/this$ ls
+                        folder1 folder2 folder3 file1.txt
+
+        - sample desc:  creates a new directory called 'folder3'
+
+
+
+rmdir   - function:     remove a directory (but it must be empty first)
+
+        - sample1:      apascua@sample:~/this$ ls
+                        folder1 folder2 folder3 file1.txt
+
+                        apascua@sample:~/this$ rmdir folder3
+                        apascua@sample:~/this$ ls
+                        folder1 folder2 file1.txt
+
+        - sample1 desc: removes a directory called 'folder3'
+
+        - sample2:      apascua@sample:~/this/folder3$ ls
+                        file3.txt
+
+                        apascua@sample:~/this/folder3$ cd ..
+                        apascua@sample:~/this$ ls
+                        folder1 folder2 folder3 file1.txt
+
+                        apascua@sample:~/this$ rmdir folder3
+                        rmdir: 'folder3': Directory not empty
+
+        - sample2 desc:  cannot remove directory 'folder3'
+                         because it is non-empty
+
+
+
+whoami  - function:     print user name of the current user id
+
+        - sample:       apascua@sample:~/this$ whoami
+                        sample\apascua
+
+        - sample desc:  prints user name apascua
+
+
+
+history - function:     print command line history
+
+        - sample:       apascua@sample:~$ ls
+                        this
+
+                        apascua@sample:~$ cd this
+                        apascua@sample:~/this$ pwd
+                        /c/users/apascua/this
+
+                        apascua@sample:~/this$ history
+                                                 1  ls
+                                                 2  cd this
+                                                 3  pwd
+
+        - sample desc:  prints all the commands that were entered,
+                        which include ls, cd this, and pwd                                       
