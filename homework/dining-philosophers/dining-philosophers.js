@@ -14,22 +14,39 @@ var getFull = [cycles(), cycles(), cycles(), cycles(), cycles()]; //takes x cycl
 var state = [thinking, thinking, thinking, thinking, thinking];
 
 var left = function (philosopher) {
-    return (philosopher + 1)%n;
+    return (philosopher + 1)%totalPhilosophers;
 }
 
 var right = function (philosopher) {
-    return (philosopher + n - 1)%n;
+    return (philosopher + totalPhilosophers - 1)%totalPhilosophers;
 }
 
 var oneCycle = function () {
+	console.log("current cycle = " + currentCycle);
+	console.log("getHungry = " + getHungry);
+	console.log("state = " + state);
+
     for (i = 0; i < 5; i++) {
+	    isHeEating(i);
 	    isHeHungry(i);
 	}
 	
 	currentCycle++;
-	console.log("current cycle = " + currentCycle);
-	console.log("getHungry = " + getHungry);
-	console.log("state = " + state);
+}
+
+var isHeEating = function (philosopher) {
+    if (state[philosopher] == hungry && 
+	    state[left(philosopher)] != eating &&
+		state[right(philosopher)] != eating) {
+	    
+		state[philosopher] = eating;
+		leftChopstick = document.getElementById("chopstick-" + left(philosopher));
+		rightChopstick = document.getElementById("chopstick-" + right(philosopher));
+		eating = document.getElementById("eating-" + philosopher);
+		leftChopstick.style.visibility = "hidden";
+		rightChopstick.style.visiblity = "hidden";
+		eating.style.visibility = "visible";
+	}
 }
 
 var isHeHungry = function (philosopher) {
@@ -37,6 +54,7 @@ var isHeHungry = function (philosopher) {
 	    state[philosopher] = hungry; //update the philosopher's state to hungry
 		cloud = document.getElementById("thinking-" + philosopher);
 		cloud.style.visibility = "hidden";
+		getHungry[philosopher] = cycles();
 	}
 }
 
