@@ -28,12 +28,19 @@ var oneCycle = function () {
 	console.log("current cycle = " + currentCycle);
 	console.log("getHungry = " + getHungry);
 	console.log("state = " + state);
+	console.log("freeChopstick = " + freeChopstick);
+	console.log("waitingQueue = " + waitingQueue);
+
+    for (i = 0; i < 5; i++) {
+	    
+	}
 
 	whoIsWaiting();
 	
     for (i = 0; i < 5; i++) {
 //	    isHeEating(i);
 	    isHeHungry(i);
+//		isHeFull(i);
 	}
 	
 	currentCycle++;
@@ -60,36 +67,14 @@ var whoIsWaiting = function () {
 			eatingPhilosopher.style.visibility = "visible";
 			freeChopstick[left(philosopher)] = !freeChopstick[left(philosopher)];
 			freeChopstick[right(philosopher)] = !freeChopstick[right(philosopher)];
-		}
+			
+			console.log("\nI'm being read\n");
+			
+		} else {getFull[philosopher]++;
+		console.log("\nI'm being read\n");};
 	}
 }
 
-/*
-var isHeEating = function (philosopher) {
-    if (state[philosopher] == hungry &&
-	    freeChopstick[left(philosopher)] &&
-		freeChopstick[right(philosopher)]) {
-
-		state[philosopher] = eating;
-		leftChopstick = document.getElementById("chopstick-" + left(philosopher));
-		rightChopstick = document.getElementById("chopstick-" + right(philosopher));
-		eatingPhilosopher = document.getElementById("eating-" + philosopher);
-		leftChopstick.style.visibility = "hidden";
-		rightChopstick.style.visiblity = "hidden";
-		eatingPhilosopher.style.visibility = "visible";
-		freeChopstick[left(philosopher)] = !freeChopstick[left(philosopher)];
-		freeChopstick[right(philosopher)] = !rightChopstick[left(philosopher)];
-
-	} else if (state[philosopher] == hungry && 
-	    (state[left(philosopher)] == eating || 
-		state[right(philosopher)] == eating)) {
-	    
-		waitingQueue.push(philosopher);
-		state[philosopher] = waiting;
-	}
-		
-}
-*/
 
 
 var isHeHungry = function (philosopher) {
@@ -97,23 +82,21 @@ var isHeHungry = function (philosopher) {
 	    state[philosopher] = hungry; //update the philosopher's state to hungry
 		cloud = document.getElementById("thinking-" + philosopher);
 		cloud.style.visibility = "hidden";
-		getHungry[philosopher] = cycles();
+		getFull[philosopher] = cycles() + currentCycle;
 	}
 
 	if (state[philosopher] == hungry && freeChopstick[left(philosopher)] && freeChopstick[right(philosopher)]) {
 	    state[philosopher] = eating;
 		leftChopstick = document.getElementById("chopstick-" + left(philosopher));
 		rightChopstick = document.getElementById("chopstick-" + right(philosopher));
-		
-		console.log("left = " + left(philosopher));
-		console.log("right = " + right(philosopher));
-		
 		eatingPhilosopher = document.getElementById("eating-" + philosopher);
 		leftChopstick.style.visibility = "hidden";
 		rightChopstick.style.visibility = "hidden";
 		eatingPhilosopher.style.visibility = "visible";
 		freeChopstick[left(philosopher)] = !freeChopstick[left(philosopher)];
 		freeChopstick[right(philosopher)] = !freeChopstick[right(philosopher)];
+		
+		console.log("\nphilosopher is eating\n");
 	} else if (state[philosopher] == hungry && (!freeChopstick[left(philosopher)] || !freeChopstick[right(philosopher)])) {
 	    waitingQueue.push(philosopher);
 		state[philosopher] = waiting;
@@ -123,7 +106,24 @@ var isHeHungry = function (philosopher) {
 }
 
 
+var isHeFull = function (philosopher) {
+    if (getFull[philosopher] == currentCycle) { //if it has reached the point in time when the philosopher is supposed to be hungry
+	    state[philosopher] = thinking; //update the philosopher's state to hungry
+		cloud = document.getElementById("thinking-" + philosopher);
+		cloud.style.visibility = "visible";
 
+		leftChopstick = document.getElementById("chopstick-" + left(philosopher));
+		rightChopstick = document.getElementById("chopstick-" + right(philosopher));
+		eatingPhilosopher = document.getElementById("eating-" + philosopher);
+		leftChopstick.style.visibility = "visible";
+		rightChopstick.style.visibility = "visible";
+		eatingPhilosopher.style.visibility = "hidden";
+		freeChopstick[left(philosopher)] = !freeChopstick[left(philosopher)];
+		freeChopstick[right(philosopher)] = !freeChopstick[right(philosopher)];
+
+		getHungry[philosopher] = cycles() + currentCycle;
+	}
+}
 
 var simulation = function () {
     setInterval(oneCycle,2000); //this creates an endless loop
@@ -160,4 +160,30 @@ mutex unlock --> nobody touches the table until I pick up my chopsticks
 monitor --> syntax-condensed version of a semaphore
 - Hoare
 */
+
+
+var isHeEating = function (philosopher) {
+    if (state[philosopher] == hungry &&
+	    freeChopstick[left(philosopher)] &&
+		freeChopstick[right(philosopher)]) {
+
+		state[philosopher] = eating;
+		leftChopstick = document.getElementById("chopstick-" + left(philosopher));
+		rightChopstick = document.getElementById("chopstick-" + right(philosopher));
+		eatingPhilosopher = document.getElementById("eating-" + philosopher);
+		leftChopstick.style.visibility = "hidden";
+		rightChopstick.style.visiblity = "hidden";
+		eatingPhilosopher.style.visibility = "visible";
+		freeChopstick[left(philosopher)] = !freeChopstick[left(philosopher)];
+		freeChopstick[right(philosopher)] = !rightChopstick[left(philosopher)];
+
+	} else if (state[philosopher] == hungry && 
+	    (state[left(philosopher)] == eating || 
+		state[right(philosopher)] == eating)) {
+	    
+		waitingQueue.push(philosopher);
+		state[philosopher] = waiting;
+	}
+		
+}
 
