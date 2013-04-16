@@ -1,15 +1,14 @@
 img {
-position:absolute;
-top:10;
-left:10;
+    position:absolute;
+    top:10;
+    left:10;
 }
 
 button {
-height: 50px;
-
-font-size:200%
+    height: 50px;
+    font-size:200%;
 }
 
 .default {
-z-index:-1;
+    z-index:-1;
 }
