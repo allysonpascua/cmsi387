@@ -10,7 +10,7 @@ var cycles = function () {
 }
 
 var getHungry = [cycles(), cycles(), cycles(), cycles(), cycles()]; //cycles required to get hungery and enter hungry state
-var getFull = new Array(5); //cycles required to get full and enter thinking state
+var getFull = new Array(totalPhilosophers); //cycles required to get full and enter thinking state
 var state = [thinking, thinking, thinking, thinking, thinking];
 var freeChopstick = [true, true, true, true, true];
 var waitingQueue = [];
@@ -66,6 +66,7 @@ var whoIsWaiting = function () {
             displayState(waitingQueue[philosopher], state[waitingQueue[philosopher]]);
             getFull[waitingQueue[philosopher]]++;
             waitingQueue.splice(philosopher, 1);
+            philosopher--;
         }
         else if (!freeChopstick[left(waitingQueue[philosopher])] ||
                  !freeChopstick[right(waitingQueue[philosopher])])
