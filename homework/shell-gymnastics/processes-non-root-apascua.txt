@@ -1,0 +1,20 @@
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+syslog     662  0.0  0.0 184780  3272 ?        Sl   Apr08   1:13 rsyslogd -c5
+statd      677  0.0  0.0  25612  1528 ?        Ss   Apr08   0:00 rpc.statd -L
+102        679  0.0  0.0  24160   436 ?        Ss   Apr08   0:00 dbus-daemon --system --fork --activation=upstart
+daemon     882  0.0  0.0  16784   316 ?        Ss   Apr08   0:00 atd
+mysql      904  0.0  0.5 171064 21196 ?        Ssl  Apr08   2:21 /usr/sbin/mysqld
+postfix   1263  0.0  0.0  27224  1788 ?        S    Apr08   0:00 qmgr -l -t fifo -u
+postfix   9124  0.0  0.0  37828  3064 ?        S    Apr09   0:00 tlsmgr -l -t unix -u -c
+www-data  9996  0.0  0.2 203448 11172 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data  9998  0.0  0.2 203440 11156 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data  9999  0.0  0.2 203432 11156 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data 10710  0.0  0.2 205252 11608 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data 12056  0.0  0.2 203480 11208 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data 18389  0.0  0.2 203172 11156 ?        S    Apr21   0:00 /usr/sbin/apache2 -k start
+www-data 24310  0.0  0.2 202892 10796 ?        S    Apr22   0:00 /usr/sbin/apache2 -k start
+www-data 24396  0.0  0.2 202892 10796 ?        S    Apr22   0:00 /usr/sbin/apache2 -k start
+www-data 24451  0.0  0.2 202928 11076 ?        S    Apr22   0:00 /usr/sbin/apache2 -k start
+ntp      28492  0.0  0.0  28824  1652 ?        Ss   03:50   0:00 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -c /var/lib/ntp/ntp.conf.dhcp -u 110:119
+www-data 28508  0.0  0.1 201720  7932 ?        S    03:53   0:00 /usr/sbin/apache2 -k start
+postfix  29508  0.0  0.0  27012  1608 ?        S    04:57   0:00 pickup -l -t fifo -u -c
