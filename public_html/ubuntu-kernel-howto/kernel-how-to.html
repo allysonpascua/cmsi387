@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>How to Build Your Own Kernel</title>
+        <style>
+            #content
+            {
+            background: white;
+            width: 60%;
+            margin-left:auto;
+            margin-right:auto;
+            }
+
+            body
+            {
+            background: #DE3B00;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="content">
+    
+            <p>Ensure that you have git installed in your system. <br/>
+            You will be using git to obtain the entire Ubuntu Kernel source.</p>
+
+            <p>You can install git using the following command if it is not already in your machine:</p>
+            <code>sudo apt-get git</code>
+
+            <p>Git clone the repository for the Ubuntu version you want.<br/>
+            You can see a list of repositories of Kernel source code for all releases and from other users on <a href="http://kernel.ubuntu.com/">kernel.ubuntu.com</a></p>
+             
+            <p>To obtain your own local copy of the Kernel source, clone the repository for the Ubuntu release you want with the following command:</p>
+
+            <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-<release>.git</code>
+
+            <p>For example if you wanted the Kernel source Quantal, you would type the type the following:</p>
+
+            <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-quantal.git</code>
+
+            <p>Next you will need to download the necessary tools for building a kernel on your system.<br/>  
+            The following command will do so for the version of linux you are running:</p>
+
+            <code>sudo apt-get build-dep linux-image-$(uname -r)</code>
+
+            <p>If configuration changes are desired, type the following set of commands:</p>
+
+            <code>chmod a+x debian/scripts/*<br/>
+            chmod a+x debian/scripts/misc/*<br/>
+            fakeroot debian/rules clean<br/>
+            fakeroot debian/rules editconfigs
+            </code>
+
+            <p>This will call the menuconfig command, which is a tool used to configure the Linux kernel source.</p>
+
+            <p>To build the actual kernel, change your working directory to the root of the kernel source tree.</p>
+
+            <p>Type in the following commands:</p>
+
+            <code>fakeroot debian/rules clean<br/>
+            fakeroot debian/rules binary-headers binary-generic
+            </code>
+
+            <p>The first command deletes a bunch of build products to build fresh.<br/>
+            The second command essentially builds the kernel.</p>
+
+            <p>The above process will take quite a bit of time.  At this time you should take a break, read a magazine, solve a puzzle, etc.</p>
+
+            <p>You will know the build was successful if you see a set of .deb files one directory above the build root directory.</p>
+
+            <p>You have now officially built your own kernel!</p>
+
+        </div>
+    </body>
+</html>
