@@ -6,39 +6,61 @@
         <style>
             #content
             {
-            background: white;
-            width: 60%;
-            margin-left:auto;
-            margin-right:auto;
+                background: white;
+                width: 60%;
+                margin-left:auto;
+                margin-right:auto;
+                padding: 25px;
             }
 
             body
             {
-            background: #DE3B00;
+                background: #DE3B00;
+            }
+            
+            .example
+            {
+                background:#FFFBC9;
+                border: 1px dotted; 
+                padding-left: 10px;
             }
         </style>
     </head>
 
     <body>
-
         <div id="content">
     
+            <h2>How to Build Your Own Kernel</h2>
+    
+            <p>This page contains step-by-step instructions on how to build and install your own kernel</p>
+            
+            <hr/>
+
+            <h3>Setting the Stage</h3>
+            
+            <p>For this tutorial, we will be building the kernel using a Linux machine running on Ubuntu.<br/>
+            You can download the latest release of Ubuntu <a href="http://www.ubuntu.com/download/desktop">here</a>.</p>
+            
             <p>Ensure that you have git installed in your system. <br/>
             You will be using git to obtain the entire Ubuntu Kernel source.</p>
 
             <p>You can install git using the following command if it is not already in your machine:</p>
-            <code>sudo apt-get git</code>
+            <code>sudo apt-get install git</code>
 
             <p>Git clone the repository for the Ubuntu version you want.<br/>
             You can see a list of repositories of Kernel source code for all releases and from other users on <a href="http://kernel.ubuntu.com/">kernel.ubuntu.com</a></p>
              
             <p>To obtain your own local copy of the Kernel source, clone the repository for the Ubuntu release you want with the following command:</p>
 
-            <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-<release>.git</code>
+            <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-< release >.git</code>
+            
+            <p/>
 
-            <p>For example if you wanted the Kernel source Quantal, you would type the type the following:</p>
-
-            <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-quantal.git</code>
+            <div class="example">
+                <p>For example if you wanted the Kernel source Quantal, you would type the type the following:</p>
+                <code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-quantal.git</code>
+                <p/>
+            </div>
 
             <p>Next you will need to download the necessary tools for building a kernel on your system.<br/>  
             The following command will do so for the version of linux you are running:</p>
@@ -55,7 +77,12 @@
 
             <p>This will call the menuconfig command, which is a tool used to configure the Linux kernel source.</p>
 
-            <p>To build the actual kernel, change your working directory to the root of the kernel source tree.</p>
+            <hr/>
+            
+            <h3>Building the Kernel</h3>
+            
+            <p>Now you are ready to build the actual kernel.<br/>
+            First, change your working directory to the root of the kernel source tree.</p>
 
             <p>Type in the following commands:</p>
 
@@ -71,6 +98,23 @@
             <p>You will know the build was successful if you see a set of .deb files one directory above the build root directory.</p>
 
             <p>You have now officially built your own kernel!</p>
+            
+            <hr/>
+            
+            <h3>Installing and Testing the Kernel</h3>
+            
+            <p>Install the kernel package with the following commands:</p>
+            
+            <code>sudo dpkg -i linux*< version number >*.deb</code>
+            
+            <p/>
+            
+            <div class="example">
+                <p>For example, if you build kernel with version "3.5.0-26.42", you would type the following:</p>
+                <code>sudo dpkg -i linux*3.5.0-26.42*.deb<br/>
+                sudo reboot</code>
+                <p/>
+            </div>
 
         </div>
     </body>
