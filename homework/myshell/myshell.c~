@@ -1,0 +1,65 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
+/**
+ * This program demonstrates the use of the fork() and exec()
+ * functions.
+ */
+int main() {
+
+  char words[256];
+
+
+    /* String to hold the command to run. */
+    char command[256];
+    char argument[256];
+
+    while (!feof(stdin)) {
+      printf("Enter the command to run: ");
+      int commandCount = scanf("%s", command);
+      printf("Command: %d\n", commandCount);
+      int argumentCount = scanf("%[^\n]s", argument);
+      printf("Argument: %d\n", argumentCount);
+    }
+    printf("All done!!!!!  *******\n");
+
+  while (scanf("%s", words) != EOF) {
+
+    printf("Enter the command to run: ");
+    scanf("%s", command);
+    scanf("%[^\n]s", argument);
+
+    /* Variable that will store the fork result. */
+    pid_t pid;
+
+    /* Perform the actual fork. */
+    pid = fork();
+    if (pid < 0) {
+        /* Error condition. */
+        fprintf(stderr, "Fork failed\n");
+        return -1;
+    } else if (pid == 0) {
+        /* Child process. */
+        printf("Running...\n");
+        execlp(command, command, NULL);
+
+        if (strcmp(command, "cd") == 0) {
+	  int ret;
+          ret = chdir(argument);
+        };    
+
+    } else {
+        /* Parent process. */
+        int result;
+        wait(&result);
+        printf("All done; result = %d\n", result);
+        printf("command = %s\n", command);
+        printf("argument = %s\n", argument);
+    }
+
+    return 0;
+
+    }
+}

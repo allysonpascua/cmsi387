@@ -1,0 +1,39 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
+/**
+ * This program demonstrates the use of the fork() and exec()
+ * functions.
+ */
+int main() {
+
+  char words[256];
+
+
+    /* String to hold the command to run. */
+    char command[256];
+    char argument[256];
+
+    while (!feof(stdin)) {
+      printf("Enter the command to run: ");
+      int commandCount = scanf("%s", command);
+      if (commandCount != -1) {
+	int argumentCount = scanf("%[^\n]s", argument);
+	printf("Argument: %d\n", argumentCount);
+      }
+
+    }
+    printf("All done!!!!!  *******\n");
+
+  while (scanf("%s", words) != EOF) {
+
+    printf("Enter the command to run: ");
+    scanf("%s", command);
+    scanf("%[^\n]s", argument);
+
+
+
+    }
+}
