@@ -9,58 +9,51 @@
  */
 int main() {
 
-  char words[256];
-
-
     /* String to hold the command to run. */
     char command[256];
     char argument[256];
-
-    while (!feof(stdin)) {
-      printf("Enter the command to run: ");
-      int commandCount = scanf("%s", command);
-      if (commandCount != -1) {
-	int argumentCount = scanf("%[^\n]s", argument);
-	printf("Argument: %d\n", argumentCount);
-      }
-    }
-    printf("All done!!!!!  *******\n");
-
-  while (scanf("%s", words) != EOF) {
-
-    printf("Enter the command to run: ");
-    scanf("%s", command);
-    scanf("%[^\n]s", argument);
-
-    /* Variable that will store the fork result. */
     pid_t pid;
+ 
+    while (!feof(stdin)) {
+        printf("Enter the command to run: ");
+        int commandCount = scanf("%s%[^\n]s", command, argument);
+        memmove(argument, argument+1, strlen(argument));
 
-    /* Perform the actual fork. */
-    pid = fork();
-    if (pid < 0) {
-        /* Error condition. */
-        fprintf(stderr, "Fork failed\n");
-        return -1;
-    } else if (pid == 0) {
-        /* Child process. */
-        printf("Running...\n");
-        execlp(command, command, NULL);
+        if (commandCount != -1) {
 
-        if (strcmp(command, "cd") == 0) {
-	  int ret;
-          ret = chdir(argument);
-        };    
+            pid = fork();
 
-    } else {
-        /* Parent process. */
-        int result;
-        wait(&result);
-        printf("All done; result = %d\n", result);
-        printf("command = %s\n", command);
-        printf("argument = %s\n", argument);
+            if (pid < 0) {
+                /* Error condition. */
+                fprintf(stderr, "Fork failed\n");
+                return -1;
+            } else if (pid == 0) {
+                /* Child process. */
+                printf("Running...\n");
+
+                if (strcmp(command, "cd") == 0) {
+
+		  
+		  printf("%c", argument[1]);
+                  
+		  printf("command is %s and arg is %s\n", command, argument);
+		  chdir(argument);
+                  int result;
+                  wait(&result);
+                  printf("All done; result = %d\n\n\n", result);
+                } else {
+                    execlp(command, command, NULL);
+                }
+            } else {
+
+
+                /* Parent process. */
+                int result;
+                wait(&result);
+                printf("All done; result = %d\n\n\n", result);
+            }
+        }
     }
 
     return 0;
-
-    }
 }
