@@ -17,9 +17,11 @@ int main() {
     while (!feof(stdin)) {
         printf("Enter the command to run: ");
         int commandCount = scanf("%s%[^\n]s", command, argument);
+
+        //remove space character in argument
         memmove(argument, argument+1, strlen(argument));
 
-        if (commandCount != -1) {
+        if (commandCount != -1 || command != "\n") {
 
             pid = fork();
 
@@ -27,16 +29,12 @@ int main() {
                 /* Error condition. */
                 fprintf(stderr, "Fork failed\n");
                 return -1;
+
             } else if (pid == 0) {
                 /* Child process. */
                 printf("Running...\n");
 
-                if (strcmp(command, "cd") == 0) {
-
-		  
-		  printf("%c", argument[1]);
-                  
-		  printf("command is %s and arg is %s\n", command, argument);
+                if (strcmp(command, "cd") == 0) {             
 		  chdir(argument);
                   int result;
                   wait(&result);
@@ -44,9 +42,8 @@ int main() {
                 } else {
                     execlp(command, command, NULL);
                 }
+
             } else {
-
-
                 /* Parent process. */
                 int result;
                 wait(&result);
