@@ -1,0 +1,12 @@
+1.
+The fork() method creates a copy of the process of the initial process.  The current directory depends on the process environment.  The child process has its own environment.  After the fork, doing a cd <input directory> in the child process sets its local environment to <input directory>.  However, the parent process is still in the directory previous to the new one.  After the child process completes, the parent process proceeds with its own execution with its own environment unchanged.
+
+In order to change the directory, the chdir() method must be used.
+
+2.
+
+My shell can run scripts (tested with my hello.c program, which prints the string "hello" when executed).  Although the methods execl(), execv(), ... returns an error for files not recognized as executable (like shell scripts), execlp() assumes such files to be a shell script and invokes a known command interpreter to interpret such files.
+
+3.
+
+CTRL+D currently does not exit my shell (well, it sort of does). I'm getting a strange problem where for the amount of commands I enter in my shell, I have to enter CTRL+D for the same number of times to completely exit my program.  I'm guessing it has something to do with the fork, though I'm not sure if this is supposed to be the expected behavior.
