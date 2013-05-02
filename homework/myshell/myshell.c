@@ -21,7 +21,7 @@ int main() {
         //remove space character in argument
         memmove(argument, argument+1, strlen(argument));
 
-        if (commandCount != -1 || command != "\n") {
+        if (commandCount != -1) {
 
             pid = fork();
 
@@ -35,10 +35,10 @@ int main() {
                 printf("Running...\n");
 
                 if (strcmp(command, "cd") == 0) {             
-		  chdir(argument);
-                  int result;
-                  wait(&result);
-                  printf("All done; result = %d\n\n\n", result);
+		    chdir(argument);
+                    int result;
+                    wait(&result);
+                    printf("All done; result = %d\n\n\n", result);
                 } else {
                     execlp(command, command, NULL);
                 }
