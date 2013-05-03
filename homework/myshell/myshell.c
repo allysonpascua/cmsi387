@@ -34,30 +34,18 @@ int main() {
                 /* Child process. */
                 printf("Running...\n");
 
-                // JD: Consider this: you are changing the directory within
-                //     the child.  That means the parent stays on the same
-                //     directory.  After the child returns from a chdir, it
-                //     leaves the if statement and then...returns to the top
-                //     of the loop.  Think about this---is this the correct
-                //     behavior?  Meanwhile, what is the parent doing?
-                //
-                //     For an additional data point, run your shell and run
-                //     some correct commands.  On another terminal do a ps
-                //     and note the processes that are running.  Then, do
-                //     a cd command (on your shell).  Take a look at the
-                //     processes after that.  Think about whether what you
-                //     see at that point looks correct.
-                if (strcmp(command, "cd") == 0) {             
-		    chdir(argument);
-                    int result;
-                    wait(&result);
-                    printf("All done; result = %d\n\n\n", result);
+                if (strcmp(command, "cd") == 0) {           
+	            chdir(argument);
+                    return 0;
                 } else {
                     execlp(command, command, NULL);
                 }
 
             } else {
                 /* Parent process. */
+                if (strcmp(command, "cd") == 0) {
+	          chdir(argument);
+                }
                 int result;
                 wait(&result);
                 printf("All done; result = %d\n\n\n", result);

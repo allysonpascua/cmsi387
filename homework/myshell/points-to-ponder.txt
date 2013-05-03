@@ -9,4 +9,4 @@ My shell can run scripts (tested with my hello.c program, which prints the strin
 
 3.
 
-CTRL+D currently does not exit my shell (well, it sort of does). I'm getting a strange problem where for the amount of commands I enter in my shell, I have to enter CTRL+D for the same number of times to completely exit my program.  I'm guessing it has something to do with the fork, though I'm not sure if this is supposed to be the expected behavior.
+CTRL+D exits my shell.  This is accomplished with the condition in the top while statement, which prompts a user to enter a command until the user enters an EOF, i.e. until the user types in a CTRL+D (or CTRL+C).
