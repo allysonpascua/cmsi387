@@ -1,0 +1,35 @@
+*** Commands performed for steps 1-3
+
+dd if=/dev/zero of=image count=1024
+mke2fs image
+sudo mount -o loop -o nosuid -o nodev image ./
+
+*** files for step 4
+
+a. top-non-empty-file.txt
+b. top-level-directory
+c. top-level-directory/sub-non-empty-file.txt
+d. top-level-directory/top-non-empty-file-symbolic.txt
+e. sub-non-empty-file-hard.txt
+
+*** output of ls commands on now-populated file system
+
+command: ls -ali ./
+output:
+
+total 19
+       2 drwxr-xr-x  4 allyson allyson  1024 May  4 22:13 .
+55711262 drwxrwxr-x 13 allyson allyson  4096 May  4 21:51 ..
+      11 drwx------  2 root    root    12288 May  4 21:48 lost+found
+      14 drwxrwxr-x  2 allyson allyson  1024 May  4 22:15 top-level-directory
+      12 -rw-rw-r--  1 allyson allyson    53 May  4 22:13 top-non-empty-file.txt
+
+
+command: ls -ali ./top-level-directory/
+
+output:
+total 3
+14 drwxrwxr-x 2 allyson allyson 1024 May  4 22:15 .
+ 2 drwxr-xr-x 4 allyson allyson 1024 May  4 22:13 ..
+15 -rw-rw-r-- 1 allyson allyson   46 May  4 22:01 sub-non-empty-file.txt
+13 lrwxrwxrwx 1 allyson allyson   24 May  4 22:15 top-non-empty-file-symbolic.txt -> ./top-non-empty-file.txt
