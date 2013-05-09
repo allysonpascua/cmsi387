@@ -16,6 +16,7 @@ int main() {
  
     while (!feof(stdin)) {
         printf("Enter the command to run: ");
+        // JD: This works for parsing one argument, but no more than one.
         int commandCount = scanf("%s%[^\n]s", command, argument);
 
         //remove space character in argument
@@ -34,10 +35,18 @@ int main() {
                 /* Child process. */
                 printf("Running...\n");
 
-                if (strcmp(command, "cd") == 0) {           
+                if (strcmp(command, "cd") == 0) {
+                    // JD: This shouldn't even be here---chdir is completely
+                    //     a parent-process affair.
+                    //
+                    //     With that in mind, there shouldn't even *be* a
+                    //     fork call if the command is known to be cd.
+                    //     That becomes strictly a parent-process activity.
 	            chdir(argument);
                     return 0;
                 } else {
+                    // JD: You don't form the exec call in such a way that
+                    //     the command-line arguments get through to it.
                     execlp(command, command, NULL);
                 }
 
@@ -47,6 +56,7 @@ int main() {
 	          chdir(argument);
                 }
                 int result;
+                // JD: Support for background processes is missing.
                 wait(&result);
                 printf("All done; result = %d\n\n\n", result);
             }
