@@ -3,10 +3,21 @@ The fork() method creates a copy of the process of the initial process.  The cur
 
 In order to change the directory, the chdir() method must be used.
 
+# JD: The reasoning above is mostly correct.  You are missing the follow-up
+#     conclusion that, because chdir only relevantly affects the parent, then
+#     there is not even a need to create a child process upon a cd command.
+
 2.
 
 My shell can run scripts (tested with my hello.c program, which prints the string "hello" when executed).  Although the methods execl(), execv(), ... returns an error for files not recognized as executable (like shell scripts), execlp() assumes such files to be a shell script and invokes a known command interpreter to interpret such files.
 
+# JD: Yes, your shell can run scripts, but not precisely in the way that you explain.
+#     I have committed a file called "script" to show you an example of a script that
+#     I successfully ran with your shell.
+
 3.
 
 CTRL+D exits my shell.  This is accomplished with the condition in the top while statement, which prompts a user to enter a command until the user enters an EOF, i.e. until the user types in a CTRL+D (or CTRL+C).
+
+# JD: Yes, ctrl-d is indeed the universal EOF indicator (well, in Unix-like operating
+#     systems, at least).
