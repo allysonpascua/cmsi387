@@ -15,19 +15,25 @@ void setPageTable(pagetable *pt) {
 
 int getPhysical(int logical) {
 
-    char binValue [9];
-    char highOrderBits[5];
+    int physical;
 
-    itoa (logical,binValue,2);
-    printf("binValue: %s\n",binValue);
+    if (logical < 0 || logical > 255) {
+        printf("getPhysical(%d) = ERR_OUT_OF_RANGE\n", logical);
+        return -1; //ERR_OUT_OF_RANGE
+    }
 
-    memcpy(highOrderBits, &binValue[0], strlen(binValue)-4);
-    highOrderBits[strlen(binValue)-4] = '\0';
+    int highOrderBits = logical >> 4;
+    int lowOrderBits = logical & 0xf;
 
+    if (ptr[highOrderBits].valid == 0) {
+        printf("getPhysical(%d) = ERR_INVALID\n", logical);
+        return -2; //ERR_INVALID
+    }
+    else {
+        physical = ptr[highOrderBits].frame << 4;
+        physical = physical | lowOrderBits;
+        printf("getPhysical(%d) = %d\n", logical, physical);
+        return physical;
+    }
 
- 
-
-    printf("highOrderBits: %s\n", highOrderBits);
-
-    return 0;
 }
