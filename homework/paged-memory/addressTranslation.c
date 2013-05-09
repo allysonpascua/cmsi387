@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static pagetable *ptr = NULL; // ptr = "page table register"
 
