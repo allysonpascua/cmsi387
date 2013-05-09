@@ -23,7 +23,7 @@ int getPhysical(int logical) {
     memcpy(highOrderBits, &binValue[0], strlen(binValue)-4);
     highOrderBits[strlen(binValue)-4] = '\0';
 
-    itoa(highOrderBits, highOrderDec, 10);
+
  
 
     printf("highOrderBits: %s\n", highOrderBits);
