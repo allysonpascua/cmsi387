@@ -17,6 +17,8 @@ int getPhysical(int logical) {
 
     int physical;
 
+    // JD: Some definitions in the .h file can take the place
+    //     of the hardcoded values here.
     if (logical < 0 || logical > 255) {
         printf("getPhysical(%d) = ERR_OUT_OF_RANGE\n", logical);
         return -1; //ERR_OUT_OF_RANGE
@@ -25,6 +27,7 @@ int getPhysical(int logical) {
     int highOrderBits = logical >> 4;
     int lowOrderBits = logical & 0xf;
 
+    // JD: Saying (!ptr[highOrderBits].valid) is more C-ish :)
     if (ptr[highOrderBits].valid == 0) {
         printf("getPhysical(%d) = ERR_INVALID\n", logical);
         return -2; //ERR_INVALID
